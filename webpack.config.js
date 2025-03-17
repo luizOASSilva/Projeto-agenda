@@ -1,11 +1,11 @@
 const path = require('path');
 
 module.exports = {
-    mode: 'production',
-    entry: './public/js/index.js',
+    mode: 'development',
+    entry: './src/index.js',
     output: {
         filename: 'bundle.js',
-        path: path.resolve(__dirname, 'dist')
+        path: path.resolve(__dirname, 'dist', 'js')
     },
     module: {
         rules: [
@@ -20,6 +20,10 @@ module.exports = {
                         ]
                     }
                 }
+            }, 
+            {
+                test: /\.css$/,
+                use: ['style-loader', 'css-loader', 'postcss-loader']
             }
         ]
     },
