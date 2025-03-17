@@ -28,7 +28,7 @@ app.use(sessionConfig);
 app.set('view engine', 'ejs')
 app.set('views', path.resolve(__dirname, 'src', 'views'));
 
-app.use(express.static(path.resolve(__dirname, 'dist')));
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(express.urlencoded({extended: true}));
 app.use(router);
