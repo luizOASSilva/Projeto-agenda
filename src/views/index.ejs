@@ -1,5 +1,47 @@
 <%- include('./partials/head') %>
+    <%- include('./partials/nav') %>
 
 
+    <section class="min-h-dvh">
+        <div class="h-20 w-full"></div>
+
+        <div class="flex h-[80vh] justify-center">
+            <div class="flex-col px-2 w-6xl">
+                <div class="m-auto">
+                    <div class=" bg-purple-50 py-4 px-6 rounded-full">
+                        <h2 class="text-2xl text-gray-800 px-1">Agenda <i class="fa-solid fa-calendar-days text-gray-800 float-right"> <span class="font-sans text-purple-700 font-normal"> io</span> </i></h2>
+                        <hr class="mt-1.5 text-purple-700">
+                    </div>
+                    <p class="p-4 pb-4">Visualize seus <span class="text-purple-700">contatos</span> salvos:</p>
+                    <div class="grid gap-4">
+                        <div class=" bg-gray-50 py-2.5 px-6 grid grid-cols-5 gap-2 text-center">
+                            <p>Luiz</p>
+                            <p>Otavio</p>
+                            <p>luizotavioassilva@gmail.com</p>
+                            <p>(11) 98552-7064</p>
+                            <div class="flex flex-row justify-around">
+                                <p><i class="fa-solid fa-pen-to-square text-purple-700 cursor-pointer"></i></p>
+                                <p><i class="fa-solid fa-trash text-red-800 cursor-pointer"></i></p>
+                            </div>
+                        </div>
+                        <div class=" bg-gray-50 py-4 px-6 grid grid-cols-5 gap-2 text-center">
+                            <p>Luiz</p>
+                            <p>Otavio</p>
+                            <p>luizotavioassilva@gmail.com</p>
+                            <p>(11) 98552-7064</p>
+                            <div class="flex flex-row justify-around">
+                                <p><i class="fa-solid fa-pen-to-square text-purple-700 cursor-pointer"></i></p>
+                                <p><i class="fa-solid fa-trash text-red-800 cursor-pointer"></i></p>
+                            </div>
+                        </div>
+                    </div>
+                </div> 
+            </div>
+        </div>
+
+        <form action="./contato" method="post">
+            <input type="submit" value="+" class="fixed bottom-2 md:bottom-4 right-2 md:right-4 bg-purple-700 h-14 w-20 rounded-full text-3xl font-medium text-white cursor-pointer">
+        </form>
+    </section>
 
 <%- include('./partials/footer') %>

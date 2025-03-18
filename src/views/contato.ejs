@@ -1,0 +1,31 @@
+<%- include('./partials/head') %>
+    <%- include('./partials/nav') %>
+
+    <section class="h-dvh">
+        <div class="h-20 w-full"></div>
+
+            <div class="flex h-[80vh] items-center justify-center">
+                <div class="flex-col px-2 w-2xl">
+                    <h2 class="text-center text-2xl mb-16"><span class="text-purple-700">Adicionar</span> contato</h2>
+                    <p class="pb-4">Adicione um novo contato à sua lista de contatos:</p>
+                    <form action='/' method="post" class="flex flex-col w-full p-0">
+                        <label for="nome" class="pb-2">Digite o nome:</label>
+                        <input autocomplete="off" type="text" name="nome" id="nome" class="border-2 h-8 pl-1">
+                            
+                        <label for="sobrenome" class="pb-2 mt-6">Digite o sobrenome:</label>
+                        <input autocomplete="off" type="text" name="sobrenome" id="sobrenome" class="border-2 h-8 pl-1">
+
+                        <label for="email" class="pb-2 mt-6">Digite o email:</label>
+                        <input autocomplete="off" type="email" name="email" id="email" class="border-2 h-8 pl-1">
+
+                        <label for="phone" class="pb-2 mt-6">Digite o telefone:</label>
+                        <input autocomplete="off" type="number" name="phone" id="phone" class="border-2 h-8 pl-1 w-2xs">
+
+                        <input type="submit" name="" id="" class="font-medium mt-10 bg-purple-700 text-white p-2.5 rounded-xs hover:bg-purple-800 cursor-pointer" value='Adicionar contato'>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<%- include('./partials/footer') %>
