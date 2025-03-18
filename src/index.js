@@ -11,7 +11,6 @@ const copyYear = document.querySelector('#copyYear');
         const textNode = document.createTextNode(year);
         
         copyYear.appendChild(textNode);
-    } else {
-        return;
     }
+    return;
 }) ();

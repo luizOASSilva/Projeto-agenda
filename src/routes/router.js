@@ -1,16 +1,24 @@
 const express = require('express');
 const router = express.Router();
 const homeController = require('../controllers/homeController');
-const loginController = require('../controllers/loginController');
+const authController = require('../controllers/authController');
 const contatoController = require('../controllers/contatoController');
 
-router.get('/', homeController.home);
-router.post('/contato', contatoController.contato);
+    // rotas da home
+    router.get('/', homeController.home);
+    router.post('/contato', homeController.adicionarContato);
 
-router.get('/login', loginController.login);
-router.post('/', loginController.sendLogin)
-router.get('/login/cadastro', loginController.cadastro);
+    // rotas de contato
+    router.get('/contato', contatoController.contato);
+    router.post('/', contatoController.registraContato);
 
-router.get('/login/cadastro', loginController.cadastro);
+
+    // rotas de login
+    router.get('/login', authController.login);
+    router.post('/login/auth', authController.fazLogin)
+
+    //rotas de cadastro
+    router.get('/login/cadastro', authController.cadastro);
+    router.post('/login', authController.criaCadastro);
 
 module.exports = router;

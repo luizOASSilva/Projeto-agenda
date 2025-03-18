@@ -14,32 +14,24 @@
                     </div>
                     <p class="p-4 pb-4">Visualize seus <span class="text-purple-700">contatos</span> salvos:</p>
                     <div class="grid gap-4">
-                        <div class=" bg-gray-50 py-2.5 px-6 grid grid-cols-5 gap-2 text-center">
-                            <p>Luiz</p>
-                            <p>Otavio</p>
-                            <p>luizotavioassilva@gmail.com</p>
-                            <p>(11) 98552-7064</p>
-                            <div class="flex flex-row justify-around">
-                                <p><i class="fa-solid fa-pen-to-square text-purple-700 cursor-pointer"></i></p>
-                                <p><i class="fa-solid fa-trash text-red-800 cursor-pointer"></i></p>
+                        <% for(let contatos of arrContatos) {%>
+                            <div class=" bg-gray-50 py-2.5 px-6 grid grid-cols-5 gap-2 text-center shadow-2xs inset-shadow-gray-700">
+                                <p><%= contatos.nome %></p>
+                                <p><%= contatos.sobrenome %></p>
+                                <p><%= contatos.email %></p>
+                                <p><%= contatos.telefone %></p>
+                                <div class="flex flex-row justify-around">
+                                    <p><a href="/"><i class="fa-solid fa-pen-to-square text-purple-700 cursor-pointer"></i></a></p>
+                                    <p><a href=""></a><i class="fa-solid fa-trash text-red-800 cursor-pointer"></a></i></p>
+                                </div>
                             </div>
-                        </div>
-                        <div class=" bg-gray-50 py-4 px-6 grid grid-cols-5 gap-2 text-center">
-                            <p>Luiz</p>
-                            <p>Otavio</p>
-                            <p>luizotavioassilva@gmail.com</p>
-                            <p>(11) 98552-7064</p>
-                            <div class="flex flex-row justify-around">
-                                <p><i class="fa-solid fa-pen-to-square text-purple-700 cursor-pointer"></i></p>
-                                <p><i class="fa-solid fa-trash text-red-800 cursor-pointer"></i></p>
-                            </div>
-                        </div>
+                        <% } %>
                     </div>
                 </div> 
             </div>
         </div>
 
-        <form action="./contato" method="post">
+        <form action="/contato" method="post">
             <input type="submit" value="+" class="fixed bottom-2 md:bottom-4 right-2 md:right-4 bg-purple-700 h-14 w-20 rounded-full text-3xl font-medium text-white cursor-pointer">
         </form>
     </section>
