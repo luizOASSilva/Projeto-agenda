@@ -1,4 +1,5 @@
 const CadastroModel = require('../models/CadastroModel');
+const User = require('../models/CadastroModel');
 
 exports.login = (req, res) => {
     res.render('login', {
@@ -11,8 +12,7 @@ exports.login = (req, res) => {
 };
 
 exports.fazLogin = (req, res) => {
-    const login = new Login(req.body);
-    res.send(login.body);
+
 }
 
 exports.cadastro = (req, res) => {
@@ -26,6 +26,20 @@ exports.cadastro = (req, res) => {
 };
 
 exports.criaCadastro = async(req, res) => {
-    await CadastroModel.cadastraUsuario(req);
-    res.redirect('/login');
+    const user = new User(req.body);
+
+    try {
+        await user.auth();
+        res.redirect('/login');
+    } catch(e) {
+        console.log(e)
+    }
+
+    // if(user.errors.length > 0) {
+    //     // req.flash('errors', this.login.errors);
+    //     req.session.save(() => {
+    //         return res.redirect('/cadastro');
+    //     });
+    //     return;
+    // }
 };

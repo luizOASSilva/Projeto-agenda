@@ -1,14 +1,8 @@
 const mongoose = require('mongoose');
 
 const LoginSchema = new mongoose.Schema({
-    email: String,
-    senha: String
+    email: { type: String, required: true},
+    senha: { type: String, required: true}
 });
 
-class Login {
-    contructor(body) {
-        this.body = body;
-    }
-};
-
-module.exports = Login;
+module.exports = User;
