@@ -27,6 +27,3 @@ exports.buscaContato = async() => {
 };
 
 exports = ContatoModel;
-
-
-

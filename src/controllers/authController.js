@@ -1,18 +1,33 @@
 const CadastroModel = require('../models/CadastroModel');
-const User = require('../models/CadastroModel');
+const LoginModel = require('../models/LoginModel');
 
 exports.login = (req, res) => {
     res.render('login', {
         formTitle: 'Login',
-        formUrl: '/login/auth',
+        formUrl: '/',
         confirmPassword: false,
         figureUrl: '/img/ssshape_login.svg',
         buttonText: 'Entrar',
+        flashMessage: req.flash('errors'),
     });
 };
 
-exports.fazLogin = (req, res) => {
+exports.fazLogin = async(req, res) => {
+    const user = new LoginModel(req.body);
+    try {
+        await user.auth();
 
+        if(user.errors.length > 0) {
+            req.flash('errors', newUser.errors);
+            req.session.save(() => {
+                res.redirect('/login'); 
+            });
+        }else {
+            res.redirect('/');
+        }
+    } catch(e) {
+        console.log(e);
+    }
 }
 
 exports.cadastro = (req, res) => {
@@ -21,25 +36,28 @@ exports.cadastro = (req, res) => {
         formUrl: '/login',
         confirmPassword: true,
         figureUrl: '/img/ssshape_cadastro.svg',
-        buttonText: 'Cadastrar-se'
+        buttonText: 'Cadastrar-se',
+        flashMessage: req.flash('errors'),
     });
 };
 
 exports.criaCadastro = async(req, res) => {
-    const user = new User(req.body);
+    const newUser = new CadastroModel(req.body);
 
     try {
-        await user.auth();
-        res.redirect('/login');
-    } catch(e) {
-        console.log(e)
-    }
+        await newUser.auth();
 
-    // if(user.errors.length > 0) {
-    //     // req.flash('errors', this.login.errors);
-    //     req.session.save(() => {
-    //         return res.redirect('/cadastro');
-    //     });
-    //     return;
-    // }
+        if(newUser.errors.length > 0) {
+            req.flash('errors', newUser.errors);
+
+            req.session.save(() => {
+                res.redirect('/login/cadastro'); 
+            });
+            return;
+        }else {
+            res.redirect('/login');
+        }
+    } catch(e) {
+        console.log(e);
+    }
 };

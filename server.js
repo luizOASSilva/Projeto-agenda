@@ -6,7 +6,8 @@ const app = express();
 const router = require('./src/routes/router');
 const mongoose = require('mongoose');
 const session = require('express-session');
-const MongoStore = require('connect-mongo')
+const flash = require('connect-flash');
+const MongoStore = require('connect-mongo');
 
 mongoose.connect(process.env.MONGO_URI)
     .then(resp => app.emit('successfully'))
@@ -23,12 +24,12 @@ const sessionConfig = session({
     }
 });
 
+app.use(flash());
+
 app.use(sessionConfig);
 
 app.set('view engine', 'ejs')
 app.set('views', path.resolve(__dirname, 'src', 'views'));
-
-app.use(express.json());
 
 app.use(express.static(path.join(__dirname, 'public')));
 
