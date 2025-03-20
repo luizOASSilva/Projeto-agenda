@@ -15,7 +15,7 @@ const contatoController = require('../controllers/contatoController');
 
     // rotas de login
     router.get('/login', authController.login);
-    router.post('/', authController.fazLogin);
+    router.post('/teste', authController.fazLogin);
 
     //rotas de cadastro
     router.get('/login/cadastro', authController.cadastro);

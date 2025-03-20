@@ -1,24 +1,24 @@
-const CadastroModel = require('../models/CadastroModel');
-const LoginModel = require('../models/LoginModel');
+const User = require('../models/AuthModel');
 
 exports.login = (req, res) => {
     res.render('login', {
         formTitle: 'Login',
-        formUrl: '/',
+        formUrl: '/teste',
         confirmPassword: false,
         figureUrl: '/img/ssshape_login.svg',
         buttonText: 'Entrar',
-        flashMessage: req.flash('errors'),
+        errorMessage: req.flash('errors'),
+        successMessage: req.flash('success') || ''
     });
 };
 
 exports.fazLogin = async(req, res) => {
-    const user = new LoginModel(req.body);
+    const user = new User(req.body);
     try {
-        await user.auth();
+        await user.login();
 
         if(user.errors.length > 0) {
-            req.flash('errors', newUser.errors);
+            req.flash('errors', user.errors);
             req.session.save(() => {
                 res.redirect('/login'); 
             });
@@ -37,25 +37,26 @@ exports.cadastro = (req, res) => {
         confirmPassword: true,
         figureUrl: '/img/ssshape_cadastro.svg',
         buttonText: 'Cadastrar-se',
-        flashMessage: req.flash('errors'),
+        errorMessage: req.flash('errors'),
     });
 };
 
 exports.criaCadastro = async(req, res) => {
-    const newUser = new CadastroModel(req.body);
+    const user = new User(req.body);
 
     try {
-        await newUser.auth();
+        await user.registra();
 
-        if(newUser.errors.length > 0) {
-            req.flash('errors', newUser.errors);
+        if(user.errors.length > 0) {
+            req.flash('errors', user.errors);
 
             req.session.save(() => {
-                res.redirect('/login/cadastro'); 
+                return res.redirect('/login/cadastro'); 
             });
             return;
         }else {
-            res.redirect('/login');
+            req.flash('success', 'E-mail cadastrado com sucesso!');
+            return res.redirect('/login'); 
         }
     } catch(e) {
         console.log(e);

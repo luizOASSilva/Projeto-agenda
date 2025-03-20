@@ -5,27 +5,35 @@
         <div class="p-4">
             <h2 class="text-3xl mb-4"> <%= formTitle %> <sub class="text-purple-700">io</sub></h2>
 
-            <% if(!confirmPassword) { %>
-                    <p class="mb-1">Faça login para usar o gerenciamento de contatos!</p>
-                    <% if(flashMessage.length > 0) { %>
-                        <p class="bg-red-100 p-2 text-red-900 mb-2 rounded-xs -mt-9"> 
-                            <% flashMessage.forEach(resp => { %>
-                                <%= resp %>
-                                <br> 
-                            <% }) %>                
-                        </p>
-                <% } %>
-            <% } else { %>
-                    <p class="mb-12">Crie seu cadastro! Para nós é importante</p>
-                    <% if(flashMessage.length > 0) { %>
+            <%  if(!confirmPassword) { %>
+                <p class="mb-12">Faça login para usar o gerenciamento de contatos!</p>
+
+                <%  if(successMessage.length > 0) { %>
+                    <p class="bg-green-200 p-2 text-green-900 mb-2 rounded-xs -mt-9"> <%= successMessage %> </p>
+                <%  } %>
+
+                    <% if(errorMessage.length > 0) { %>
                             <p class="bg-red-100 p-2 text-red-900 mb-2 rounded-xs -mt-9"> 
-                                <% flashMessage.forEach(resp => { %>
+                                <%  errorMessage.forEach(resp => { %>
+                                        <%= resp %>
+                                        <br> 
+                                <%  })  %>                
+                            </p>
+                    <%  }  %>
+
+            <%  } else { %>
+
+                    <p class="mb-12">Crie seu cadastro! Para nós é importante</p>
+                    <% if(errorMessage.length > 0) { %>
+                            <p class="bg-red-100 p-2 text-red-900 mb-2 rounded-xs -mt-9"> 
+                                <% errorMessage.forEach(resp => { %>
                                     <%= resp %>
                                     <br> 
                                 <% }) %>                
                             </p>
-                    <% } %>
-            <%   } %>
+                    <%  }   %>
+
+            <%  } %>
 
             <form action=<%= formUrl %> method="post" class="m-auto flex flex-col">
                 <label for="email" class="pb-2">Digite seu email:</label>
@@ -41,9 +49,9 @@
 
                 <input type="submit" name="" id="" class="font-medium mt-10 bg-purple-700 text-white p-2.5 rounded-xs hover:bg-purple-800 cursor-pointer" value=<%= buttonText %>>
 
-                <% if(!confirmPassword) { %>
+                <%  if(!confirmPassword) { %>
                         <p class="mt-4">Não possui uma conta? <a href="/login/cadastro" class="text-purple-700 underline">Crie uma!</a></p>
-                <% } else { %>
+                <%  } else { %>
                         <p class="mt-4">Já possui uma conta? <a href="/login" class="text-purple-700 underline">Faça login</a></p>
                 <%  } %>
 
