@@ -23,8 +23,6 @@ class Contato{
         if(this.errors.length > 0) return
 
         try {
-            console.log(this.body);
-
             const model = new ContatoModel(this.body);
             await ContatoModel.create(model);
         } catch(e) {
@@ -62,9 +60,31 @@ class Contato{
         this.telefoneLimpo = this.body.telefone.replace(/\D/g, '');
     }
 
+    async procuraPorId(id) {
+        try {
+            const contato = await ContatoModel.findById({_id: id});
+            this.telefoneLimpo = contato.telefoneLimpo;
+            return contato;
+        } catch(e) {
+            console.log(e);
+        }
+    }
+
+    async editaContato(id) {
+        try {
+            this.valida();
+
+            if(this.errors > 0) return
+
+            await ContatoModel.findByIdAndUpdate(id, this.body)
+        } catch(e) {
+            console.log(e);
+        }
+    }
+
     async deletaContato(id) {
         try {
-            await ContatoModel.findOneAndDelete({_id: id})
+            await ContatoModel.findOneAndDelete({_id: id});
         } catch(e) {
             console.log(e);
         }

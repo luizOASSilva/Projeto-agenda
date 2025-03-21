@@ -16,18 +16,23 @@
                     <%  } %>
                   
                     <p class="pb-4">Adicione um novo contato à sua lista de contatos:</p>
-                    <form action='/' method="post" class="flex flex-col w-full p-0">
+
+                    <% if(contato._id) { %>
+                        <form action='/contato/edita/envia/<%= contato._id %>' method="post" class="flex flex-col w-full p-0"> 
+                    <% } %>
+                    
+                    <form action='/contato/registra' method="post" class="flex flex-col w-full p-0">
                         <label for="nome" class="pb-2">Digite o nome:</label>
-                        <input autocomplete="off" type="text" name="nome" id="nome" class="border-2 h-8 pl-1">
+                        <input autocomplete="off" type="text" name="nome" id="nome" class="border-2 h-8 pl-1" value=<%= contato.nome %>>
                             
                         <label for="sobrenome" class="pb-2 mt-6">Digite o sobrenome:</label>
-                        <input autocomplete="off" type="text" name="sobrenome" id="sobrenome" class="border-2 h-8 pl-1">
+                        <input autocomplete="off" type="text" name="sobrenome" id="sobrenome" class="border-2 h-8 pl-1" value=<%= contato.sobrenome %>>
 
                         <label for="email" class="pb-2 mt-6">Digite o email:</label>
-                        <input autocomplete="off" type="email" name="email" id="email" class="border-2 h-8 pl-1" placeholder="exemplo@dominio.com">
+                        <input autocomplete="off" type="email" name="email" id="email" class="border-2 h-8 pl-1" placeholder="exemplo@dominio.com" value=<%= contato.email %>>
 
                         <label for="telefone" class="pb-2 mt-6">Digite o telefone:</label>
-                        <input autocomplete="off" type="text" name="telefone" id="telefone" class="border-2 h-8 pl-1 w-2xs" placeholder="(xx) xxxxx-xxxx">
+                        <input autocomplete="off" type="text" name="telefone" id="telefone" class="border-2 h-8 pl-1 w-2xs" placeholder="(xx) xxxxx-xxxx" value=<%= contato.telefone %>>
 
                         <input type="submit" name="" id="" class="font-medium mt-10 bg-purple-700 text-white p-2.5 rounded-xs hover:bg-purple-800 cursor-pointer" value='Adicionar contato'>
                     </form>

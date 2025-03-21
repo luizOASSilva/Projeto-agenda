@@ -2,30 +2,33 @@ const User = require('../models/AuthModel');
 
 exports.login = (req, res) => {
     res.setHeader('Cache-Control', 'no-store');
+    res.locals.successMessage = req.flash('success')
     res.render('login', {
         formTitle: 'Login',
-        formUrl: '/teste',
+        formUrl: '/login/auth',
         confirmPassword: false,
         figureUrl: '/img/ssshape_login.svg',
         buttonText: 'Entrar',
         errorMessage: req.flash('errors'),
-        successMessage: req.flash('success'),
         loginObrigatorio: req.flash('loginObrigatorio')
     });
 };
 
 exports.fazLogin = async(req, res) => {
     const user = new User(req.body);
+
     try {
         await user.login();
 
         if(user.errors.length > 0) {
             req.flash('errors', user.errors);
+
             req.session.save(() => {
                 return res.redirect('/login'); 
             });
         }else {
             req.session.user = user.user;
+
             res.redirect('/');
         }
     } catch(e) {
@@ -34,9 +37,10 @@ exports.fazLogin = async(req, res) => {
 }
 
 exports.cadastro = (req, res) => {
+
     res.render('cadastro', {
         formTitle: 'Cadastro',  
-        formUrl: '/login',
+        formUrl: '/login/cadastro/auth',
         confirmPassword: true,
         figureUrl: '/img/ssshape_cadastro.svg',
         buttonText: 'Cadastrar-se',
@@ -51,7 +55,7 @@ exports.criaCadastro = async(req, res) => {
         await user.registra();
 
         if(user.errors.length > 0) {
-            await req.flash('errors', user.errors);
+            req.flash('errors', user.errors);
 
             req.session.save(() => {
                 return res.redirect('/login/cadastro'); 
@@ -59,6 +63,7 @@ exports.criaCadastro = async(req, res) => {
             return;
         }else {
             req.flash('success', 'E-mail cadastrado com sucesso!');
+
             return res.redirect('/login'); 
         }
     } catch(e) {

@@ -5,6 +5,7 @@ exports.home = async(req, res) => {
     
     try {
         const arrContatos = await contato.buscaContato();
+        res.locals.mensagemDeletado = req.flash('delete')
         res.render('index', { arrContatos } );
     } catch(e) {
         console.log(e);
@@ -12,5 +13,5 @@ exports.home = async(req, res) => {
 };
 
 exports.adicionarContato = (req, res) => {
-    res.render('contato', { errorMessage: req.flash('errors') || '' });
+    res.render('contato', { errorMessage: req.flash('errors') || '', contato: '', telefoneLimpo: '' });
 };
