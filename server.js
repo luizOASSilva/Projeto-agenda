@@ -8,6 +8,7 @@ const mongoose = require('mongoose');
 const session = require('express-session');
 const flash = require('connect-flash');
 const MongoStore = require('connect-mongo');
+const { middlewareGlobal, error, flashMessages } = require('./src/middleware/globalMiddlewares');
 
 mongoose.connect(process.env.MONGO_URI)
     .then(resp => app.emit('successfully'))
@@ -24,16 +25,19 @@ const sessionConfig = session({
     }
 });
 
-app.use(flash());
-
 app.use(sessionConfig);
 
-app.set('view engine', 'ejs')
+app.use(flash());
+
+app.use(middlewareGlobal);
+
+app.set('view engine', 'ejs');
 app.set('views', path.resolve(__dirname, 'src', 'views'));
 
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(express.urlencoded({extended: true}));
+
 app.use(router);
 
 app.on('successfully', () => app.listen(3000, () => console.log('https://localhost:3000')));

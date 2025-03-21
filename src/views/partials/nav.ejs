@@ -6,7 +6,11 @@
             <li class="text-center">
                 <a href="/">Home</a>
             </li>
-                <a href="/login" class="hover:bg-purple-800 rounded-sm p-1 px-3 hover:text-white border-purple-800 border-2 text-purple-800 font-medium">Entrar</a>
+                <%  if(!user) {%>
+                        <a href="/login" class="hover:bg-purple-800 rounded-sm p-1 px-3 hover:text-white border-purple-800 border-2 text-purple-800 font-medium">Entrar</a>
+                <%  } else { %>
+                        <a href="/login/logout" class="hover:bg-red-800 rounded-sm p-1 px-3 hover:text-white border-red-800 border-2 text-red-800 font-medium">Sair</a>
+                <%  }  %>
             </li>
         </ul>
     </div>

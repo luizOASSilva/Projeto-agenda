@@ -1,29 +1,75 @@
 const moongose = require('mongoose');
+const validator = require('validator');
 
 const ContatoSchema = new moongose.Schema({
     nome: String,
     sobrenome: String,
     email: String,
-    telefone: Number,
+    telefone: String,
 });
 
 const ContatoModel = moongose.model('contato', ContatoSchema);
 
-exports.enviaContato = async req => {
-    try {
-        const model = new ContatoModel(req.body);
-        await ContatoModel.create(model);
-    } catch(e) {
-        console.log(e);
+class Contato{
+    constructor(body) {
+        this.body = body;
+        this.telefoneLimpo = '';
+        this.errors = [];
     }
-};
 
-exports.buscaContato = async() => {
-    try {
-        return await ContatoModel.find();
-    } catch(e) {
-        console.log(e);
+    async enviaContato() {
+        this.valida();
+
+        if(this.errors.length > 0) return
+
+        try {
+            console.log(this.body);
+
+            const model = new ContatoModel(this.body);
+            await ContatoModel.create(model);
+        } catch(e) {
+            console.log(e);
+        }
     }
-};
 
-exports = ContatoModel;
+    async buscaContato() {
+        try {
+            return await ContatoModel.find();
+        } catch(e) {
+            console.log(e);
+        }
+    }
+
+    valida() {
+        if(!this.body.nome || !this.body.sobrenome){
+            this.errors.push('Campos: "nome" e "sobrenome" são obrigatórios');
+            return;
+        } 
+
+        if(!this.body.email && !this.body.telefone){
+            this.errors.push('Pelo menos uma forma de é contato obrigatória (e-mail ou telefone)');
+            return;
+        } 
+        
+        this.limpaTelefone();
+
+        if(!validator.isEmail(this.body.email)) this.errors.push('E-mail inválido');
+
+        if(this.telefoneLimpo.length < 11) this.errors.push('Telefone incompleto');
+    }
+
+    limpaTelefone() {
+        this.telefoneLimpo = this.body.telefone.replace(/\D/g, '');
+    }
+
+    async deletaContato(id) {
+        try {
+            await ContatoModel.findOneAndDelete({_id: id})
+        } catch(e) {
+            console.log(e);
+        }
+    }
+
+}
+
+module.exports = Contato;

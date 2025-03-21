@@ -1,6 +1,7 @@
 const User = require('../models/AuthModel');
 
 exports.login = (req, res) => {
+    res.setHeader('Cache-Control', 'no-store');
     res.render('login', {
         formTitle: 'Login',
         formUrl: '/teste',
@@ -8,7 +9,8 @@ exports.login = (req, res) => {
         figureUrl: '/img/ssshape_login.svg',
         buttonText: 'Entrar',
         errorMessage: req.flash('errors'),
-        successMessage: req.flash('success') || ''
+        successMessage: req.flash('success'),
+        loginObrigatorio: req.flash('loginObrigatorio')
     });
 };
 
@@ -20,9 +22,10 @@ exports.fazLogin = async(req, res) => {
         if(user.errors.length > 0) {
             req.flash('errors', user.errors);
             req.session.save(() => {
-                res.redirect('/login'); 
+                return res.redirect('/login'); 
             });
         }else {
+            req.session.user = user.user;
             res.redirect('/');
         }
     } catch(e) {
@@ -48,7 +51,7 @@ exports.criaCadastro = async(req, res) => {
         await user.registra();
 
         if(user.errors.length > 0) {
-            req.flash('errors', user.errors);
+            await req.flash('errors', user.errors);
 
             req.session.save(() => {
                 return res.redirect('/login/cadastro'); 
@@ -62,3 +65,8 @@ exports.criaCadastro = async(req, res) => {
         console.log(e);
     }
 };
+
+exports.logout = (req, res) => {
+    req.session.destroy();
+    res.redirect('/');
+}

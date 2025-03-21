@@ -6,11 +6,15 @@
             <h2 class="text-3xl mb-4"> <%= formTitle %> <sub class="text-purple-700">io</sub></h2>
 
             <%  if(!confirmPassword) { %>
-                <p class="mb-12">Faça login para usar o gerenciamento de contatos!</p>
+                    <p class="mb-12">Faça login para usar o gerenciamento de contatos!</p>
 
-                <%  if(successMessage.length > 0) { %>
-                    <p class="bg-green-200 p-2 text-green-900 mb-2 rounded-xs -mt-9"> <%= successMessage %> </p>
-                <%  } %>
+                    <%  if(successMessage.length > 0) { %>
+                            <p class="bg-green-200 p-2 text-green-900 mb-2 rounded-xs -mt-9"> <%= successMessage %> </p>
+                    <%  } %>
+
+                    <%  if(loginObrigatorio.length > 0) { %>
+                            <p class="bg-yellow-50 p-2 text-yellow-400 mb-2 rounded-xs -mt-9"> <%= loginObrigatorio %> </p>
+                    <%  } %>
 
                     <% if(errorMessage.length > 0) { %>
                             <p class="bg-red-100 p-2 text-red-900 mb-2 rounded-xs -mt-9"> 
@@ -35,6 +39,7 @@
 
             <%  } %>
 
+            
             <form action=<%= formUrl %> method="post" class="m-auto flex flex-col">
                 <label for="email" class="pb-2">Digite seu email:</label>
                 <input autocomplete="off" type="email" name="email" id="email" class="border-2 h-8 pl-1">

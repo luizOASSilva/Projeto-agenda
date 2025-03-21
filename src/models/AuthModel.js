@@ -43,8 +43,6 @@ class User {
     
         try {
             this.user = await AuthModel.findOne({email: this.body.email});
-
-            console.log('este é o null', this.user);
     
             if(!this.user || !bcrypt.compareSync(this.body.senha, this.user.senha)) {
                 this.errors.push('Email ou senha inválida');
@@ -59,7 +57,7 @@ class User {
     validaRegistro() {
 
         if(!this.body.email || !this.body.senha) {
-            this.errors.push('E-mail e senha são obrigarórios');
+            this.errors.push('Campos: "e-mail" e "senha" são obrigatórios');
             return;
         }
 
@@ -73,7 +71,7 @@ class User {
     validaLogin() {
 
         if(!this.body.email || !this.body.senha) {
-            this.errors.push('E-mail e senha são obrigarórios');
+            this.errors.push('Campos: "e-mail" e "senha" são obrigatórios');
             return;
         }
 

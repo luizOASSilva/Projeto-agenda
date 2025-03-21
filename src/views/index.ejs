@@ -14,15 +14,15 @@
                     </div>
                     <p class="p-4 pb-4">Visualize seus <span class="text-purple-700">contatos</span> salvos:</p>
                     <div class="grid gap-4">
-                        <% for(let contatos of arrContatos) {%>
+                        <% for(let contatos of arrContatos) { %>
                             <div class=" bg-gray-50 py-2.5 px-6 grid grid-cols-5 gap-2 text-center shadow-2xs inset-shadow-gray-700">
                                 <p><%= contatos.nome %></p>
                                 <p><%= contatos.sobrenome %></p>
                                 <p><%= contatos.email %></p>
                                 <p><%= contatos.telefone %></p>
                                 <div class="flex flex-row justify-around">
-                                    <p><a href="/"><i class="fa-solid fa-pen-to-square text-purple-700 cursor-pointer"></i></a></p>
-                                    <p><a href=""></a><i class="fa-solid fa-trash text-red-800 cursor-pointer"></a></i></p>
+                                    <p><a href="/contato/edita/"><i class="fa-solid fa-pen-to-square text-purple-700 cursor-pointer" id=<%= contatos._id %> ></i></a></p>
+                                    <p><a href="/contato/deleta/<%= contatos._id %>"><i class="fa-solid fa-trash text-red-800 cursor-pointer" id=<%= contatos._id %> ></i></a></p>
                                 </div>
                             </div>
                         <% } %>
