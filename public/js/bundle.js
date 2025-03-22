@@ -1366,7 +1366,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _public_css_styles_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../public/css/styles.css */ "./public/css/styles.css");
 
 var copyYear = document.querySelector('#copyYear');
-setTimeout(ReactDOM.render(), 0);
 (function () {
   if (copyYear) {
     var date = new Date();
