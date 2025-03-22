@@ -1,7 +1,5 @@
 module.exports = {
-    content: [
-      './src/views/**.{html,ejs,js,jsx,ts,tsx}',  
-    ],
+    purge: ['./views/**/*.ejs', './src/**/*.js'],
     theme: {
       extend: {},
     },
