@@ -50,7 +50,7 @@ class Contato{
 
         if(!validator.isEmail(this.body.email)) this.errors.push('E-mail inválido');
 
-        if(this.body.telefone.length < 11) this.errors.push('Telefone incompleto'); //Pintos masculos
+        if(this.body.telefone.length < 11) this.errors.push('Telefone incompleto');
     }
 
     async procuraPorId(id) {
