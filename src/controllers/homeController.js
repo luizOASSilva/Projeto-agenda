@@ -1,4 +1,4 @@
-const Contato = require('../models/ContatoModel')
+const Contato = require('../models/ContatoModel');
 
 exports.home = async(req, res) => {
     const contato = new Contato(req.body);
