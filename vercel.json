@@ -1,0 +1,4 @@
+{
+    "builds": [{ "src": "./src/views/index.ejs", "use": "@vercel/node" }],
+    "routes": [{ "src": "/(.*)", "dest":"/" }]
+}
