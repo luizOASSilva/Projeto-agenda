@@ -17,7 +17,7 @@ exports.registraContato = async (req, res) => {
                 res.redirect('/contato');
             })
         } else {
-            req.flash('register', 'Contato cadastrado com sucesso');
+            req.flash('register', 'Contato adicionado à sua lista com sucesso');
             res.redirect('/');
         }
     } catch(e) {

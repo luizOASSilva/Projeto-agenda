@@ -1,7 +1,5 @@
 import '../public/css/styles.css';
 
-import Inputmask from 'inputmask';
-
 const copyYear = document.querySelector('#copyYear');
 
 (function() {
