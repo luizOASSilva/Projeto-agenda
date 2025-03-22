@@ -13,7 +13,6 @@ const ContatoModel = moongose.model('contato', ContatoSchema);
 class Contato{
     constructor(body) {
         this.body = body;
-        this.telefoneLimpo = '';
         this.errors = [];
     }
 
@@ -48,22 +47,15 @@ class Contato{
             this.errors.push('Pelo menos uma forma de é contato obrigatória (e-mail ou telefone)');
             return;
         } 
-        
-        this.limpaTelefone();
 
         if(!validator.isEmail(this.body.email)) this.errors.push('E-mail inválido');
 
-        if(this.telefoneLimpo.length < 11) this.errors.push('Telefone incompleto');
-    }
-
-    limpaTelefone() {
-        this.telefoneLimpo = this.body.telefone.replace(/\D/g, '');
+        if(this.body.telefone.length < 11) this.errors.push('Telefone incompleto'); //Pintos masculos
     }
 
     async procuraPorId(id) {
         try {
             const contato = await ContatoModel.findById({_id: id});
-            this.telefoneLimpo = contato.telefoneLimpo;
             return contato;
         } catch(e) {
             console.log(e);

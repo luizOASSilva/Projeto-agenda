@@ -10,7 +10,7 @@
 
                     <%  if(errorMessage.length > 0) { %>
                         <%  errorMessage.forEach(resp => {  %>
-                                <p class="bg-red-100 p-2 text-red-900 mb-2 rounded-xs -mt-12"><%= resp %></P>
+                                <p class="bg-red-100 p-2 text-red-900 rounded-xs -mt-8"><%= resp %></P>
                                 <br>
                         <%  });  %>
                     <%  } %>
@@ -18,7 +18,7 @@
                     <p class="pb-4">Adicione um novo contato à sua lista de contatos:</p>
 
                     <% if(contato._id) { %>
-                        <form action='/contato/edita/envia/<%= contato._id %>' method="post" class="flex flex-col w-full p-0"> 
+                            <form action='/contato/edita/envia/<%= contato._id %>' method="post" class="flex flex-col w-full p-0"> 
                     <% } %>
                     
                     <form action='/contato/registra' method="post" class="flex flex-col w-full p-0">

@@ -1,16 +1,17 @@
 const User = require('../models/AuthModel');
 
 exports.login = (req, res) => {
-    res.setHeader('Cache-Control', 'no-store');
-    res.locals.successMessage = req.flash('success')
+
+    res.locals.successMessage = req.flash('success');
+    res.locals.errorMessage= req.flash('errors');
+    res.locals.loginObrigatorio= req.flash('loginObrigatorio');
+
     res.render('login', {
         formTitle: 'Login',
         formUrl: '/login/auth',
         confirmPassword: false,
         figureUrl: '/img/ssshape_login.svg',
         buttonText: 'Entrar',
-        errorMessage: req.flash('errors'),
-        loginObrigatorio: req.flash('loginObrigatorio')
     });
 };
 
@@ -38,13 +39,14 @@ exports.fazLogin = async(req, res) => {
 
 exports.cadastro = (req, res) => {
 
+    res.locals.errorMessage = req.flash('errors');
+
     res.render('cadastro', {
         formTitle: 'Cadastro',  
         formUrl: '/login/cadastro/auth',
         confirmPassword: true,
         figureUrl: '/img/ssshape_cadastro.svg',
         buttonText: 'Cadastrar-se',
-        errorMessage: req.flash('errors'),
     });
 };
 

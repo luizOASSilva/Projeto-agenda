@@ -4,8 +4,6 @@ import Inputmask from 'inputmask';
 
 const copyYear = document.querySelector('#copyYear');
 
-const inputPhone = document.querySelector('#telefone');
-
 (function() {
     if(copyYear) {
         const date = new Date();
@@ -17,11 +15,4 @@ const inputPhone = document.querySelector('#telefone');
         copyYear.appendChild(textNode);
     }
     return;
-}) ();
-
-(function() {
-    if(inputPhone) {
-        const im = new Inputmask('(99) 99999-9999')
-        im.mask(inputPhone);
-    }
 }) ();

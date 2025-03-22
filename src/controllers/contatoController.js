@@ -17,6 +17,7 @@ exports.registraContato = async (req, res) => {
                 res.redirect('/contato');
             })
         } else {
+            req.flash('register', 'Contato cadastrado com sucesso');
             res.redirect('/');
         }
     } catch(e) {
@@ -51,6 +52,7 @@ exports.editaContato = async(req, res) => {
                 res.redirect(`/contato/edita/${req.params.id}`);
             })
         } else {
+            req.flash('edit', 'Contato editado com sucesso');
             res.redirect('/');
         }
     } catch(e) {

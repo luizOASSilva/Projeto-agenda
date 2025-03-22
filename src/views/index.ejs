@@ -11,6 +11,12 @@
                     <% if(mensagemDeletado.length > 0) { %>
                         <p class="bg-red-100 text-red-700 p-2 mt-2 mb-2 rounded-xs"> <%= mensagemDeletado %> </p>
                     <% } %>
+                    <% if(mensagemEditado.length > 0) { %>
+                        <p class="bg-blue-200 text-blue-800 p-2 mt-2 mb-2 rounded-xs"> <%= mensagemEditado %> </p>
+                    <% } %>
+                    <% if(mensagemCriado.length > 0) { %>
+                        <p class="bg-green-100 text-green-700 p-2 mt-2 mb-2 rounded-xs"> <%= mensagemCriado %> </p>
+                    <% } %>
                     <div class=" bg-purple-50 py-4 px-6 rounded-full">
                         <h2 class="text-2xl text-gray-800 px-1">Agenda <i class="fa-solid fa-calendar-days text-gray-800 float-right"> <span class="font-sans text-purple-700 font-normal"> io</span> </i></h2>
                         <hr class="mt-1.5 text-purple-700">
