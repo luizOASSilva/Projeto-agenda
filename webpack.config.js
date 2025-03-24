@@ -23,13 +23,14 @@ module.exports = {
             }, 
             {
                 test: /\.css$/,
-                use: ['style-loader', 'css-loader', 'postcss-loader']
-            },
-            {
-                test: /\.css$/i,
-                use: [MiniCssExtractPlugin.loader, "css-loader"],
+                use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader']
             },
         ]
     },
+    plugins: [
+        new MiniCssExtractPlugin({
+          filename: '../css/styles.css',  // Nome do arquivo CSS gerado
+        }),
+    ],
     devtool: 'source-map'
 };
