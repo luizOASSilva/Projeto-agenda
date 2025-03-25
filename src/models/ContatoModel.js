@@ -44,7 +44,7 @@ class Contato{
         } 
 
         if(!this.body.email && !this.body.telefone){
-            this.errors.push('Pelo menos uma das formas de contato é obrigatória (e-mail ou telefone)');
+            this.errors.push('Formas de contato são obrigatórias (e-mail ou telefone)');
             return;
         } 
 
